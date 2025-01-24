@@ -22,7 +22,7 @@ else ifeq ($(ACTION), darwin)
 else ifeq ($(ACTION), dylib)
 	OS=darwin
 else ifeq ($(ACTION), docker)
-	OS=m
+	OS=linux
 else ifeq ($(ACTION), linux)
 	OS=linux
 else ifeq ($(ACTION), so)
