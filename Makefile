@@ -91,5 +91,5 @@ dynamic: system protobuf
 #打包docker镜像
 docker: dynamic linux
 ifneq ($(wildcard $(WORKSPACE)cmd/Dockerfile),)
-	docker build --platform=linux/$(ARCH) -t $(REGISTRY)/$(PACKAGE):latest-$(ARCH) -f $(TARGET)Dockerfile --build-arg ARCH=$(ARCH) $(TARGET)
+	@docker build --platform=linux/$(ARCH) -t $(REGISTRY)/$(PACKAGE):latest-$(ARCH) -f $(TARGET)Dockerfile --build-arg ARCH=$(ARCH) $(TARGET)
 endif

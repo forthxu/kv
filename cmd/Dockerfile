@@ -9,6 +9,7 @@ ARG BUILD_DATE
 ENV APP=kv
 ENV VERSION=0.0.1
 ENV USAGE=http://forthxu.com
+ENV FINAL_ARCH=$ARCH
 
 # 镜像信息
 LABEL org.label-schema.build-date=$BUILD_DATE \
