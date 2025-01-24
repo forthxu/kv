@@ -7,16 +7,22 @@
 已实现命令
 
 ```
-set x y
-get x
-keys *
-version
+~ redis-cli -p 6378
+127.0.0.1:6378> set x y
+OK
+127.0.0.1:6378> get x
+"y"
+127.0.0.1:6378> keys *
+1) "key:__rand_int__"
+2) "x"
+127.0.0.1:6378> version
+forthxuKV version 1.0
 ```
 
 ## 压测
 
 ```
-redis-benchmark -h 127.0.0.1 -p 6378 -t set -n 1000000 -q
+~ redis-benchmark -h 127.0.0.1 -p 6378 -t set -n 1000000 -q
 
 SET: 103928.50 requests per second, p50=0.239 msec
 ```
