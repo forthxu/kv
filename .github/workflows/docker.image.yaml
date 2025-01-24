@@ -51,6 +51,6 @@ jobs:
       # 推送 Docker 镜像到 Docker Hub
       - name: Push Docker image
         run: |
-          docker tag forthxu/kv:latest ghcr.io/${{ github.repository_owner }}/kv:${{ env.tag }}-${{ matrix.platform }}
+          docker tag forthxu/kv:latest-${{ matrix.platform }} ghcr.io/${{ github.repository_owner }}/kv:${{ env.tag }}-${{ matrix.platform }}
           docker push ghcr.io/${{ github.repository_owner }}/kv:${{ env.tag }}-${{ matrix.platform }}
 

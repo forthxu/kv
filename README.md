@@ -37,6 +37,7 @@ GET: 3436426.00 requests per second, p50=0.647 msec
 make mac
 make linux ARCH=arm64
 make windows ARCH=amd64
+make docker ARCH=amd64
 ```
 
 ## 下载
@@ -54,6 +55,8 @@ make docker ARCH=arm64
 
 ```
 docker run --name kv -d -p 6378:6378 \
--v /workspace:/workspace \
 forthxu/kv:latest
+
+docker run --name kv -d -p 6378:6378 \
+ghcr.io/forthxu/kv:latest-arm64
 ```
