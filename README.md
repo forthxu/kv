@@ -35,6 +35,10 @@ make linux ARCH=arm64
 make windows ARCH=amd64
 ```
 
+## 下载
+
+https://github.com/forthxu/kv/releases
+
 ## docker
 
 ### 编译docker镜像
