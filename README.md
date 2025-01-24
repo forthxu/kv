@@ -25,6 +25,10 @@ forthxuKV version 1.0
 ~ redis-benchmark -h 127.0.0.1 -p 6378 -t set -n 1000000  -P 1000 -q
 
 SET: 1248120.38 requests per second, p50=0.367 msec
+
+~ redis-benchmark -h 127.0.0.1 -p 6378 -t get -n 1000000  -P 1000 -q
+
+GET: 3436426.00 requests per second, p50=0.647 msec
 ```
 
 ## 编译
