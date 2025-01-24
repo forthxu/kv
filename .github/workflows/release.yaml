@@ -11,17 +11,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    # Checkout the code
+    # 拉取代码
     - name: Checkout code
       uses: actions/checkout@v3
 
-    # Set up a language runtime if needed (e.g., Node.js, Go, etc.)
+    # 设置环境
     - name: Set up Go
       uses: actions/setup-go@v4
       with:
         go-version: 1.23
 
-    # Build your project
+    # 编译项目
     - name: Build project
       run: |
         make linux ARCH=amd64
@@ -31,7 +31,7 @@ jobs:
         make mac ARCH=arm64
         make windows ARCH=arm64
 
-    # Create a release
+    # 创建版本
     - name: Create Release
       id: create_release
       uses: actions/create-release@v1
@@ -44,7 +44,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 
-    # Upload files
+    # 上传文件
     - name: Upload all files
       run: |
         for file in ./build/*; do

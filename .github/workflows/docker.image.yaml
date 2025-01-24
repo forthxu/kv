@@ -1,0 +1,56 @@
+name: Build and Push Docker Image to GitHub Container Registry
+
+on:
+  push:
+    tags:
+      - 'v*'  # 触发条件：当推送的标签以 v 开头时
+  workflow_dispatch:
+
+jobs:
+  build-and-push:
+    strategy:
+      matrix:
+        platform: [amd64, arm64] # 分别构建 amd 和 arm 平台
+
+    runs-on: ubuntu-latest
+
+    steps:
+      # 拉取代码
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # 设置环境
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: 1.23
+
+      # 编译项目
+      - name: Build project
+        run: |
+          make docker ARCH=${{ matrix.platform }}
+
+      # 设置版本号
+      - name: Set Docker image tag
+        id: vars
+        run: |
+          if [ "${{ github.ref_type }}" == "tag" ]; then
+            echo "tag=${{ github.ref_name }}" >> $GITHUB_ENV
+          else
+            echo "tag=latest" >> $GITHUB_ENV
+          fi
+
+      # 登录 GitHub Container Registry
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      # 推送 Docker 镜像到 Docker Hub
+      - name: Push Docker image
+        run: |
+          docker tag forthxu/kv:latest ghcr.io/${{ github.repository_owner }}/kv:${{ env.tag }}-${{ matrix.platform }}
+          docker push ghcr.io/${{ github.repository_owner }}/kv:${{ env.tag }}-${{ matrix.platform }}
+

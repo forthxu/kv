@@ -21,6 +21,8 @@ else ifeq ($(ACTION), darwin)
 	OS=darwin
 else ifeq ($(ACTION), dylib)
 	OS=darwin
+else ifeq ($(ACTION), docker)
+	OS=m
 else ifeq ($(ACTION), linux)
 	OS=linux
 else ifeq ($(ACTION), so)
@@ -89,5 +91,7 @@ dynamic: system protobuf
 #打包docker镜像
 docker: dynamic linux
 ifneq ($(wildcard $(WORKSPACE)cmd/Dockerfile),)
+	@cp $(TARGET)$(PACKAGE).$(ARCH).${SUFFIX} $(TARGET)$(PACKAGE).${SUFFIX}
 	@docker build -t $(REGISTRY)/$(PACKAGE):latest -f $(TARGET)Dockerfile $(TARGET)
+	@rm $(TARGET)$(PACKAGE).${SUFFIX}
 endif
