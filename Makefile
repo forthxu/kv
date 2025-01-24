@@ -54,7 +54,7 @@ REGISTRY=forthxu
 
 #默认
 default: $(OS)
-	@[ -f "$(WORKSPACE)cmd/main.go" ] && $(TARGET)$(PACKAGE).$(SUFFIX) || exit 0
+	@[ -f "$(WORKSPACE)cmd/main.go" ] && $(TARGET)$(PACKAGE).$(ARCH).$(SUFFIX) || exit 0
 
 #帮助
 help:
@@ -79,13 +79,13 @@ darwin: program
 linux: program
 windows: program 
 program: system resource protobuf
-	@[ -f "$(WORKSPACE)cmd/main.go" ] && GOOS=${OS} GOARCH=${ARCH} $(GOBUILD) --ldflags=${LDFLAGS} -o $(TARGET)$(PACKAGE).${SUFFIX} $(WORKSPACE)cmd/main.go || exit 0
+	@[ -f "$(WORKSPACE)cmd/main.go" ] && GOOS=${OS} GOARCH=${ARCH} $(GOBUILD) --ldflags=${LDFLAGS} -o $(TARGET)$(PACKAGE).$(ARCH).${SUFFIX} $(WORKSPACE)cmd/main.go || exit 0
 #编译动态库
 dylib: dynamic
 so: dynamic
 dll: dynamic
 dynamic: system protobuf
-	@[ -d "$(WORKSPACE)plugin" ] && GOOS=${OS} GOARCH=${ARCH} $(GOBUILD) --ldflags=${LDFLAGS}  -buildmode=plugin -o $(TARGET)$(PACKAGE).$(DYNAMIC) $(WORKSPACE)/plugin/*.go || exit 0
+	@[ -d "$(WORKSPACE)plugin" ] && GOOS=${OS} GOARCH=${ARCH} $(GOBUILD) --ldflags=${LDFLAGS}  -buildmode=plugin -o $(TARGET)$(PACKAGE).$(ARCH).$(DYNAMIC) $(WORKSPACE)/plugin/*.go || exit 0
 #打包docker镜像
 docker: dynamic linux
 ifneq ($(wildcard $(WORKSPACE)cmd/Dockerfile),)
