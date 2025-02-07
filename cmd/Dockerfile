@@ -19,15 +19,15 @@ ENV DATE=${date}
 LABEL maintainer="forthxu <forthxu@gmail.com>"
 
 # 镜像信息
-# LABEL org.label-schema.build-date=${date} \
-#       org.label-schema.description="service ${app}" \
-#       org.label-schema.name=${app} \
-#       org.label-schema.schema-version=${version} \
-#       org.label-schema.usage=${usage}
-# 
-# LABEL org.opencontainers.image.source=${usage} \
-#       org.opencontainers.image.description="service ${app}" \
-#       org.opencontainers.image.licenses=MIT
+LABEL org.label-schema.build-date=${date} \
+      org.label-schema.description="service ${app}" \
+      org.label-schema.name=${app} \
+      org.label-schema.schema-version=${version} \
+      org.label-schema.usage=${usage}
+
+LABEL org.opencontainers.image.source=${usage} \
+      org.opencontainers.image.description="service ${app}" \
+      org.opencontainers.image.licenses=MIT
 
 # 初始化环境
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
