@@ -25,6 +25,9 @@ LABEL org.label-schema.build-date=${date} \
       org.label-schema.schema-version=${version} \
       org.label-schema.usage=${usage}
 
+LABEL org.opencontainers.image.source=${usage} \
+      org.opencontainers.image.description="service ${app}" \
+      org.opencontainers.image.licenses=MIT
 
 # 初始化环境
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
