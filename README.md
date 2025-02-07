@@ -49,14 +49,17 @@ https://github.com/forthxu/kv/releases
 ### 编译docker镜像
 
 ```
+make docker
 make docker ARCH=arm64
+make docker ARCH=amd64
 ```
 ### 启动docker容器
 
+https://github.com/forthxu/kv/pkgs/container/kv
+
 ```
-docker run --name kv -d -p 6378:6378 \
-forthxu/kv:latest
+docker pull ghcr.io/forthxu/kv:v1.0.0-amd64
 
 docker run --name kv -d -p 6378:6378 \
-ghcr.io/forthxu/kv:latest-arm64
+ghcr.io/forthxu/kv:latest-amd64
 ```
