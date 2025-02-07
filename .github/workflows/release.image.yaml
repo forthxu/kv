@@ -10,7 +10,7 @@ jobs:
   build-and-push:
     strategy:
       matrix:
-        platform: [arm64] # 分别构建 amd 和 arm 平台
+        platform: [arm64,amd64] # 分别构建 amd 和 arm 平台
 
     runs-on: ubuntu-latest
 
