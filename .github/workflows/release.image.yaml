@@ -28,6 +28,8 @@ jobs:
       # 编译项目
       - name: Build project
         run: |
+          docker buildx create --use
+          docker buildx inspect --bootstrap
           make docker ARCH=${{ matrix.platform }}
 
       # 设置版本号
