@@ -1,30 +1,30 @@
-FROM alpine:latest
-LABEL maintainer="forthxu <forthxu@gmail.com>"
+# 基础系统
+FROM alpine:3.16
 
 # 外部变量
-ARG ARCH
-ARG BUILD_DATE
+ARG app=kv
+ARG version=0.0.1
+ARG usage=http://forthxu.com
+ARG arch=amd64
+ARG date=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
 
 # 环境变量
-ENV APP=kv
-ENV VERSION=0.0.1
-ENV USAGE=http://forthxu.com
-ENV FINAL_ARCH=$ARCH
+ENV APP=${app}
+ENV VERSION=${version}
+ENV USAGE=${usage}
+ENV ARCH=${arch}
+ENV DATE=${date}
+
+# 标签
+LABEL maintainer="forthxu <forthxu@gmail.com>"
 
 # 镜像信息
-LABEL org.label-schema.build-date=$BUILD_DATE \
-      org.label-schema.description="service ${APP}" \
-      org.label-schema.name="${APP}" \
-      org.label-schema.schema-version="${VERSION}" \
-      org.label-schema.usage="${USAGE}"
+LABEL org.label-schema.build-date=${date} \
+      org.label-schema.description="service ${app}" \
+      org.label-schema.name=${app} \
+      org.label-schema.schema-version=${version} \
+      org.label-schema.usage=${usage}
 
-# 设置架构变量，优先使用外部传入值
-RUN DETECTED_ARCH=$(uname -m | tr 'A-Z' 'a-z' | sed 's/x86_64/amd64/') && \
-    FINAL_ARCH=${ARCH:-$DETECTED_ARCH} && \
-    echo "FINAL_ARCH=$FINAL_ARCH" >> /etc/environment
-
-# 加载环境变量
-RUN source /etc/environment && echo "Using architecture: $FINAL_ARCH"
 
 # 初始化环境
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
@@ -41,10 +41,10 @@ USER root
 WORKDIR /app
 
 # 拷贝程序
-COPY ${APP}.${FINAL_ARCH}.bin .
+COPY ${app}.${arch}.bin .
 
 # 暴露端口
 EXPOSE 6378
 
 # 运行程序
-ENTRYPOINT ["/bin/sh", "-c", "./${APP}.${FINAL_ARCH}.bin"]
+ENTRYPOINT ["/bin/sh", "-c", "./${app}.${arch}.bin"]
