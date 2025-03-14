@@ -44,6 +44,12 @@ make windows ARCH=amd64
 make docker ARCH=amd64
 ```
 
+## 推送git tag触发github action
+```
+git tag v1.0.4
+git push origin v1.0.4
+```
+
 ## 下载
 
 https://github.com/forthxu/kv/releases
