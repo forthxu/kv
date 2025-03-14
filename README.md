@@ -18,7 +18,7 @@ OK
 1) "key:__rand_int__"
 2) "x"
 127.0.0.1:6378> version
-forthxuKV version 1.0
+forthxuKV Version:v1.0.3, GitDate:2025-03-14T13:13:38+00:00, GitCommit:bd9eb3f, BuildDate:2025-03-14T13:14:20:z, GoVersion:go1.24.1
 ```
 
 ## 压测
