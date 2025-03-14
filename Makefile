@@ -9,10 +9,10 @@ TARGET?=$(WORKSPACE)build/
 GOBUILD=go build
 #版本信息
 GITCOMMIT=`git describe --always`
-VERSION=$$(git describe 2>/dev/null || echo "0.0.1")
+VERSION=$$(git describe 2>/dev/null || echo "1.0.2")
 GITDATE=`TZ=UTC git show -s --date=iso-strict-local --format=%cd HEAD`
 BUILDDATE=`date -u +"%Y-%m-%dT%H:%M:%S%:z"`
-LDFLAGS="-X foshou/librarys/version.Version=${VERSION} -X foshou/librarys/version.BuildDate=${BUILDDATE} -X foshou/librarys/version.GitCommit=${GITCOMMIT} -X foshou/librarys/version.GitDate=${GITDATE}"
+LDFLAGS="-X forthxu/kv/service.Version=${VERSION} -X forthxu/kv/service.BuildDate=${BUILDDATE} -X forthxu/kv/service.GitCommit=${GITCOMMIT} -X forthxu/kv/service.GitDate=${GITDATE}"
 CGO_ENABLED=0
 #编译目标
 ACTION=$(MAKECMDGOALS)

@@ -137,7 +137,7 @@ func handleConnection(conn net.Conn, store *utils.KVStore) {
 				conn.Write([]byte("$-1\r\n"))
 			}
 		case "VERSION":
-			conn.Write([]byte("+forthxuKV version 1.0\r\n"))
+			conn.Write([]byte("+forthxuKV "+getVersion()+"\r\n"))
 		default:
 			log.Println("[service] -ERR Unknown command\r\n", args)
 			conn.Write([]byte("-ERR Unknown command\r\n"))
