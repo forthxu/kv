@@ -20,10 +20,10 @@ ACTION=$(MAKECMDGOALS)
 OS?=$(shell uname|tr A-Z a-z)
 ifeq ($(ACTION), mac)
 	OS=darwin
-	SUFFIX=app
+	SUFFIX=cmd
 else ifeq ($(ACTION), darwin)
 	OS=darwin
-	SUFFIX=app
+	SUFFIX=cmd
 else ifeq ($(ACTION), dylib)
 	OS=darwin
 	SUFFIX=dylib
@@ -117,7 +117,7 @@ darwin: program
 linux: program
 windows: program 
 program: info resource protobuf
-	@[ -f "$(WORKSPACE)cmd/main.go" ] && CGO_ENABLED=${CGO_ENABLED} CC=${CC} CXX=${CXX} LD=${LD} GOOS=${OS} GOARCH=${ARCH} $(GOBUILD) --ldflags=${LDFLAGS} -o $(TARGET)$(PACKAGE).$(ARCH).${SUFFIX} $(WORKSPACE)cmd/main.go || exit 0
+	[ -f "$(WORKSPACE)cmd/main.go" ] && CGO_ENABLED=${CGO_ENABLED} CC=${CC} CXX=${CXX} LD=${LD} GOOS=${OS} GOARCH=${ARCH} $(GOBUILD) --ldflags=${LDFLAGS} -o $(TARGET)$(PACKAGE).$(ARCH).${SUFFIX} $(WORKSPACE)cmd/main.go || exit 0
 #编译动态库
 dylib: dynamic
 so: dynamic

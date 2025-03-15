@@ -2,6 +2,7 @@
 *.log
 *.pid
 *.app
+*.cmd
 *.bin
 *.exe
 build/
