@@ -1,23 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>简易KV系统</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css/github-markdown.min.css">
+  <style>
+    body {
+      padding: 2rem;
+    }
+  </style>
 </head>
 <body>
-  <div id="content"></div>
+  <div class="markdown-body" id="content">Loading README.md...</div>
+
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <script>
-    fetch('./README.md')
+    fetch('README.md')
       .then(response => response.text())
-      .then(data => {
-        document.getElementById('content').innerHTML = marked(data);
+      .then(markdown => {
+        document.getElementById('content').innerHTML = marked.parse(markdown);
       })
-      .catch(error => {
-        document.getElementById('content').innerText = 'Error loading README.md';
-        console.error(error);
+      .catch(err => {
+        document.getElementById('content').innerText = '无法加载 README.md 文件';
+        console.error(err);
       });
   </script>
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </body>
 </html>
