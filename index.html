@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>简易KV系统</title>
+</head>
+<body>
+  <div id="content"></div>
+  <script>
+    fetch('./README.md')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('content').innerHTML = marked(data);
+      })
+      .catch(error => {
+        document.getElementById('content').innerText = 'Error loading README.md';
+        console.error(error);
+      });
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.0.10/marked.min.js"></script>
+</body>
+</html>
